@@ -1,0 +1,47 @@
+
+================================================================================
+DATASET PREPARATION SUMMARY
+================================================================================
+
+DATASET CONFIGURATION
+--------------------------------------------------------------------------------
+Number of Classes: 4
+Classes: black_rot, powdery_mildew, rust, scab
+Image Size: 224x224 pixels
+Normalization: ImageNet (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+
+DATASET SIZES
+--------------------------------------------------------------------------------
+Training Set:     3066 samples (  95 batches)
+Validation Set:   3065 samples (  96 batches)
+Test Set:         6128 samples ( 192 batches)
+Total:           12259 samples
+
+CLASS WEIGHTS (for handling imbalance)
+--------------------------------------------------------------------------------
+black_rot            0.6510
+powdery_mildew       4.4903
+rust                 0.6868
+scab                 1.2735
+
+DATA AUGMENTATION
+--------------------------------------------------------------------------------
+Training Set:
+  - Random Horizontal Flip (p=0.5)
+  - Random Vertical Flip (p=0.3)
+  - Random Rotation (±20°)
+  - Color Jitter (brightness, contrast, saturation, hue)
+  - Random Affine (translation, scaling)
+  - Random Grayscale (p=0.1)
+
+Validation/Test Sets:
+  - No augmentation (only resize and normalize)
+
+DATA LOADER CONFIGURATION
+--------------------------------------------------------------------------------
+Batch Size: 32
+Number of Workers: 4
+Pin Memory: True
+Device: CUDA
+
+================================================================================
