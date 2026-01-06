@@ -6,39 +6,45 @@ Key Highlights
 - 92.50% Validation Accuracy - Surpasses classical CNN baselines by 2.5-3.5%
 - Hybrid Architecture - Classical CNN + 4-qubit quantum circuit with variational layers.
 -  4-Class Classification - Healthy, Apple Scab, Apple Rust, Multiple Diseases
-Input (224x224x3)
-    ↓
-┌─────────────────────────────────────────────┐
-│  Classical CNN Backbone                      │
-│  • Stem: Conv(7x7, stride=4) → 32 channels  │
-│  • Block 1: Conv layers → 64 channels       │
-│  • Block 2: Conv layers → 128 channels      │
-│  • Block 3: Conv layers → 224 channels      │
-│  • Global Average Pooling                    │
-└─────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────┐
-│  Attention Mechanism                         │
-│  • Squeeze-Excitation: 224 → 56 → 224      │
-└─────────────────────────────────────────────┘
-    ↓           ↓
-Classical     Quantum Path
-Features      ↓
-    │     ┌─────────────────────────────────┐
-    │     │  Quantum Circuit (4 qubits)     │
-    │     │  • Amplitude Encoding           │
-    │     │  • 2 Variational Layers         │
-    │     │  • RY/RZ Rotations             │
-    │     │  • Ring Entanglement (CNOTs)   │
-    │     │  • Pauli-Z Measurements        │
-    │     └─────────────────────────────────┘
-    │            ↓
-    └────→ Concatenate
-           ↓
-    ┌─────────────────────────────────────────┐
-    │  Hybrid Classifier                       │
-    │  • FC: 228 → 96 → 48 → 4               │
-    │  • Dropout: 0.45, 0.35                  │
-    └─────────────────────────────────────────┘
-           ↓
-    Output (4 classes)
+Input Image (224×224×3)
+         ↓
+    [Classical Convolutions]
+    Hierarchical feature extraction
+    via spatial filtering operations
+         ↓
+  Feature Maps (7×7×224)
+         ↓
+  [Global Average Pooling]
+  Spatial aggregation: ℝ^(7×7×224) → ℝ^224
+         ↓
+  [Attention Mechanism]
+  Channel recalibration via
+  learned importance weights
+         ↓
+    ↙         ↘
+Classical    Quantum Path
+Branch       ↓
+  │     [Amplitude Encoding]
+  │     Classical → Quantum
+  │     features     state
+  │          ↓
+  │     [Variational Circuit]
+  │     Entanglement-based
+  │     feature refinement
+  │     (Hilbert space: 2⁴)
+  │          ↓
+  │     [Measurement]
+  │     Quantum → Classical
+  │          ↓
+  └────→ [Concatenation]
+         Hybrid feature vector
+         (dim = 228)
+              ↓
+      [Dense Layers + Dropout]
+      Non-linear classification
+      with regularization
+              ↓
+      [Softmax Activation]
+      Probability distribution
+              ↓
+    Disease Class (4 outputs)
